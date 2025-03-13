@@ -33,42 +33,52 @@ const handleClick = async()=>{
   return (
      <div className={styles.page}>
         <main className={styles.main}>
-        <div className={styles.center}>
-           <Image
-              className={styles.logo}
-              src="/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-           />
+           <div className={styles.center}>
+              <Image
+                 className={styles.logo}
+                 src="/next.svg"
+                 alt="Next.js logo"
+                 width={180}
+                 height={38}
+                 priority
+              />
            </div>
-          <section>
-            <div className={styles.center}>
-            <h1 className={styles.h1}>Ask AI</h1>
-            </div>
-            <div className={`${styles.center} ${styles.h2}`}>
-            <h2> Using Gemini API</h2>
-            </div>
-           
-           <div>
-              <input className={`${styles.input} ${styles.center}`} value={prompt} onChange={handleInputChange}></input>
-           </div>
-           <div className={`${styles.center}`} >
-              <button  onClick={handleClick}>Click me to get AI response</button>
-              <div>
-              {aiResponse.split("**").map((item, index) =>{
-               return <div key={index} className={styles.response}>{item}</div>;
-              })}
+           <section>
+              <h1 className={`${styles.center} ${styles.h1}`}>Ask AI</h1>
 
+              <h2 className={`${styles.center} ${styles.h2}`}> Using Gemini API</h2>
+
+              <div>
+                 <input
+                    className={`${styles.input} ${styles.center}`}
+                    value={prompt}
+                    onChange={handleInputChange}
+                 ></input>
               </div>
-           </div>
+              <div className={`${styles.center}`}>
+                 <button className={`${styles.center}`} onClick={handleClick}>
+                    Click me to get AI response
+                 </button>
+              </div>
+
+              <div className={styles.response}>
+                 <div >
+                    {aiResponse.split('**').map((item, index) => {
+                       return (
+                          <div key={index} className={styles.response}>
+                             {item}
+                          </div>
+                       );
+                    })}
+                 </div>
+              </div>
            </section>
+
            <ol>
               <li>
-                 Get started by editing <code>src/app/page.tsx</code>.
+                 Ask Gemini AI anything and click <code>button</code>.
               </li>
-              <li>Save and see your changes instantly.</li>
+              <li>See your response above.</li>
            </ol>
 
            <div className={styles.ctas}>

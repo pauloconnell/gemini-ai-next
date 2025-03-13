@@ -24,6 +24,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  background-color: grey; /* Green background */
+  border: none; /* Remove default border */
+  border-radius: 5px;
+  color: white; /* White text */
+  padding: 15px 32px; /* Padding inside the button */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Allow padding and width */
+  font-size: 16px; /* Font size */
+  margin: 4px 2px; /* Margin around the button */
+  cursor: pointer; /* Change cursor on hover */
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
