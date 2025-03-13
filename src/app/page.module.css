@@ -1,3 +1,53 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.h1 {
+  font-size: 3em;
+}
+.h2 {
+  margin-top: .5em;
+  margin-bottom: 1em;
+}
+
+.input {
+  margin-top: .3em;
+  margin-bottom: .3em;
+  width: 100%; /* Full width of the parent container */
+  max-width: 400px; /* Optional max width */
+  padding: 10px; /* Add some inner spacing */
+  font-size: 16px; /* Set font size for better readability */
+  font-family: Arial, sans-serif; /* Specify a default font */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  /*outline: none;  Remove default blue outline on focus */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth focus effects */
+}
+
+.input:focus {
+  border-color: #007bff; /* Highlight border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add subtle glow */
+}
+
+.input:disabled {
+  background-color: #e9ecef; /* Change background for disabled inputs */
+  cursor: not-allowed; /* Show not-allowed cursor */
+}
+
+.input::placeholder {
+  color: #aaa; /* Style placeholder text */
+  font-style: italic; /* Optional styling */
+}
+
+.response {
+  margin-top: 10px;
+  
+}
+
+
 .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
@@ -55,6 +105,8 @@
   border-radius: 4px;
   font-weight: 600;
 }
+
+
 
 .ctas {
   display: flex;
