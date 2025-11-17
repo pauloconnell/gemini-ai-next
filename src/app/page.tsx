@@ -17,16 +17,18 @@ const chat = model.startChat();
 
 const [aiResponse, setAiResponse] = useState('');
 const [prompt, setPrompt] = useState('');
-cons [isLoading, setIsLoading] = useState(false);
+const [isLoading, setIsLoading] = useState(false);
 
 const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   setPrompt(event.target.value);
 };
 
 const handleClick = async()=>{
-  const result = await chat.sendMessage(prompt);
+ setIsLoading(true);
+   const result = await chat.sendMessage(prompt);
   setAiResponse(() => result.response.text());
   setPrompt('');
+  setIsLoading(false);
 }
 
 
@@ -55,10 +57,16 @@ const handleClick = async()=>{
                     onChange={handleInputChange}
                  ></input>
               </div>
+              {!prompt ? ( <ol>
+              <li>
+                 Ask Gemini AI anything and click <code>button</code>.
+              </li>
+              <li>See your response above.</li>
+           </ol>): (<div><br/><br/></div>)}
               <div className={`${styles.center}`}>
-                 <button className={`${styles.center}`} onClick={handleClick}>
+            {isLoading ? "Loading":     <button className={`${styles.center}`} onClick={handleClick}>
                     Click me to get AI response
-                 </button>
+                 </button>}
               </div>
 
               <div className={styles.response}>
@@ -74,12 +82,7 @@ const handleClick = async()=>{
               </div>
            </section>
 
-           <ol>
-              <li>
-                 Ask Gemini AI anything and click <code>button</code>.
-              </li>
-              <li>See your response above.</li>
-           </ol>
+        
 
            <div className={styles.ctas}>
               <a
