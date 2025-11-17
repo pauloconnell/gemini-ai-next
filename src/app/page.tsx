@@ -103,7 +103,7 @@ const handleClick = async()=>{
                     width={20}
                     height={20}
                  />
-                 Deploy now
+                 Deploy to Vercel
               </a>
               <a
                  href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -111,7 +111,7 @@ const handleClick = async()=>{
                  rel="noopener noreferrer"
                  className={styles.secondary}
               >
-                 Read our docs
+                 Read Next.js docs
               </a>
            </div>
         </main>
