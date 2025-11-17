@@ -47,10 +47,7 @@
   font-style: italic; /* Optional styling */
 }
 
-.response {
-  margin-top: 10px;
-  
-}
+
 
 
 .page {
@@ -113,9 +110,10 @@
 
 .response {
   margin-top: 1em;
-  background-color: aquamarine;
   border-radius: 5px;
   padding:10px;
+  margin-top: 10px;
+  background-color: #383838;
 }
 
 

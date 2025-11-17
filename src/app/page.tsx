@@ -7,12 +7,13 @@ import React, { useState } from 'react';
 
 export default function Home() {
 
-  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-
+  const apiKey:string|undefined = process.env.NEXT_PUBLIC_API_KEY;
+const URL:string = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" ;
   
 //console.log("check key", apiKey)
 const genAI = new GoogleGenerativeAI(apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
 const [aiResponse, setAiResponse] = useState('');
 const [prompt, setPrompt] = useState('');
 

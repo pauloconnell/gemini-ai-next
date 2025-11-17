@@ -38,6 +38,10 @@ button {
   cursor: pointer; /* Change cursor on hover */
 }
 
+input {
+  color: black;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
