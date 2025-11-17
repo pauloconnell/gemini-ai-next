@@ -13,21 +13,20 @@ const URL:string = "https://generativelanguage.googleapis.com/v1beta/models/gemi
 //console.log("check key", apiKey)
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const chat = model.startChat();
 
 const [aiResponse, setAiResponse] = useState('');
 const [prompt, setPrompt] = useState('');
+cons [isLoading, setIsLoading] = useState(false);
 
 const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   setPrompt(event.target.value);
 };
 
 const handleClick = async()=>{
-  
- // const prompt = "Explain how AI works";
-  //console.log("got prompt", prompt)
-  const result = await model.generateContent(prompt);
- // console.log("got response",Object.keys(result.response));
+  const result = await chat.sendMessage(prompt);
   setAiResponse(() => result.response.text());
+  setPrompt('');
 }
 
 
