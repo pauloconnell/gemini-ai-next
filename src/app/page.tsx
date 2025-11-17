@@ -8,9 +8,14 @@ import React, { useState } from 'react';
 export default function Home() {
 
   const apiKey:string|undefined = process.env.NEXT_PUBLIC_API_KEY;
-const URL:string = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" ;
+//const URL:string = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" ;
   
 //console.log("check key", apiKey)
+
+if(!apiKey){
+  throw new Error("API key is not defined");
+}
+
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 const chat = model.startChat();
