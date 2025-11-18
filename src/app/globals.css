@@ -58,3 +58,8 @@ a {
     color-scheme: dark;
   }
 }
+
+.error {
+  color: red;
+  font-weight: 700;
+}
