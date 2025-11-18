@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useGeminiChat } from '../hooks/useGeminiChat';
 
 export default function Home() {
-  const { aiResponse, isLoading, sendMessage } = useGeminiChat();
+  const { aiResponse, isLoading, sendMessage, sendCondenseMessage, history, error } = useGeminiChat();
   const [prompt, setPrompt] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,17 @@ export default function Home() {
   const handleClick = async () => {
     await sendMessage(prompt);
     setPrompt('');
+    
   };
+
+  const condensePrompt = "Summarize this conversation in one paragraph"
+  const condenseConvo = async ()=> {
+   await sendCondenseMessage(condensePrompt);
+
+     setPrompt('');
+
+
+  }
 
 
   return (
@@ -44,12 +54,17 @@ export default function Home() {
                     onChange={handleInputChange}
                  ></input>
               </div>
+
+              {error && <div className="error">{error}</div>}
               {!prompt ? ( <ol>
               <li>
                  Ask Gemini AI anything and click <code>button</code>.
               </li>
               <li>See your response above.</li>
            </ol>): (<div><br/><br/></div>)}
+
+
+
               <div className={`${styles.center}`}>
             {isLoading ? "Loading":     <button className={`${styles.center}`} onClick={handleClick}>
                     Click me to get AI response
@@ -96,7 +111,20 @@ export default function Home() {
                  Read Next.js docs
               </a>
            </div>
+           <div>
+            <h2>History</h2>
+            <button onClick={()=>condenseConvo()}>Condense conversation to reset context and summarize history</button>
+            <ol>
+            {history.map((item, index)=>(
+               <li key={index}><strong>{item?.role}</strong> <br/>
+               {item?.parts[0]?.text}
+               </li>
+            ))}
+            </ol>
+           </div>
         </main>
+
+
         <footer className={styles.footer}>
            <a
               href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
