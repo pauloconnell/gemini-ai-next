@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useGeminiChat } from '../hooks/useGeminiChat';
 
 export default function Home() {
-  const { aiResponse, isLoading, sendMessage, sendCondenseMessage, history, error } = useGeminiChat();
+  const { aiResponse, isLoading, sendMessage, sendCondenseMessage, resetConvo, history, error } = useGeminiChat();
   const [prompt, setPrompt] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +22,12 @@ export default function Home() {
   const condensePrompt = "Summarize this conversation in one paragraph"
   const condenseConvo = async ()=> {
    await sendCondenseMessage(condensePrompt);
-
      setPrompt('');
+  }
 
+   const reset = async ()=> {
+        setPrompt('');
+      resetConvo();
 
   }
 
@@ -56,23 +59,36 @@ export default function Home() {
               </div>
 
               {error && <div className="error">{error}</div>}
-              {!prompt ? ( <ol>
-              <li>
-                 Ask Gemini AI anything and click <code>button</code>.
-              </li>
-              <li>See your response above.</li>
-           </ol>): (<div><br/><br/></div>)}
-
-
+              {!prompt ? (
+                 <ol>
+                    <li>
+                       Ask Gemini AI anything and click <code>button</code>.
+                    </li>
+                    <li>See your response above.</li>
+                 </ol>
+              ) : (
+                 <div>
+                    <br />
+                    <br />
+                 </div>
+              )}
 
               <div className={`${styles.center}`}>
-            {isLoading ? "Loading":     <button className={`${styles.center}`} onClick={handleClick}>
-                    Click me to get AI response
-                 </button>}
+                 {isLoading ? (
+                    'Loading'
+                 ) : (
+                    <button
+                       className={`${styles.center}`}
+                       onClick={handleClick}
+                       title="Submit AI Request"
+                    >
+                       Click me to get AI response
+                    </button>
+                 )}
               </div>
 
               <div className={styles.response}>
-                 <div >
+                 <div>
                     {aiResponse.split('**').map((item, index) => {
                        return (
                           <div key={index} className={styles.response}>
@@ -83,8 +99,6 @@ export default function Home() {
                  </div>
               </div>
            </section>
-
-        
 
            <div className={styles.ctas}>
               <a
@@ -112,18 +126,31 @@ export default function Home() {
               </a>
            </div>
            <div>
-            <h2>History</h2>
-            <button onClick={()=>condenseConvo()}>Condense conversation to reset context and summarize history</button>
-            <ol>
-            {history.map((item, index)=>(
-               <li key={index}><strong>{item?.role}</strong> <br/>
-               {item?.parts[0]?.text}
-               </li>
-            ))}
-            </ol>
+              <h2 className="center">History</h2>
+              <button
+                 onClick={() => condenseConvo()}
+                 title="Reset Context, but keep summary"
+              >
+                 Condense conversation to reset context
+              </button>
+              <button onClick={() => reset()} title="Reset">
+                 Start new chat
+              </button>
+              <div className=" history">
+                 <ol>
+                    {history.map((item, index) => (
+                       <React.Fragment key={index}>
+                          <li>
+                             <strong>{item?.role}</strong> <br />
+                             {item?.parts[0]?.text}
+                          </li>
+                          {item?.role === 'model' && <br />}
+                       </React.Fragment>
+                    ))}
+                 </ol>
+              </div>
            </div>
         </main>
-
 
         <footer className={styles.footer}>
            <a

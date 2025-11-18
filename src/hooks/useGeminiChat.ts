@@ -58,12 +58,19 @@ export const useGeminiChat = () => {
     }
   };
 
+  const resetConvo = async () => {
+    initializeChat(); // Start fresh chat
+    setHistory([]);
+    setAiResponse('');
+  };
+
 
   return {
     aiResponse,
     isLoading,
     sendMessage,
     sendCondenseMessage,
+    resetConvo,
     history,
     setHistory,
     error
