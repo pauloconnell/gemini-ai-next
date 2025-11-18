@@ -2,39 +2,21 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import { GoogleGenerativeAI } from"@google/generative-ai";
 import React, { useState } from 'react';
+import { useGeminiChat } from '../hooks/useGeminiChat';
 
 export default function Home() {
+  const { aiResponse, isLoading, sendMessage } = useGeminiChat();
+  const [prompt, setPrompt] = useState('');
 
-  const apiKey:string|undefined = process.env.NEXT_PUBLIC_API_KEY;
-//const URL:string = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" ;
-  
-//console.log("check key", apiKey)
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrompt(event.target.value);
+  };
 
-if(!apiKey){
-  throw new Error("API key is not defined");
-}
-
-const genAI = new GoogleGenerativeAI(apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-const chat = model.startChat();
-
-const [aiResponse, setAiResponse] = useState('');
-const [prompt, setPrompt] = useState('');
-const [isLoading, setIsLoading] = useState(false);
-
-const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  setPrompt(event.target.value);
-};
-
-const handleClick = async()=>{
- setIsLoading(true);
-   const result = await chat.sendMessage(prompt);
-  setAiResponse(() => result.response.text());
-  setPrompt('');
-  setIsLoading(false);
-}
+  const handleClick = async () => {
+    await sendMessage(prompt);
+    setPrompt('');
+  };
 
 
   return (

@@ -1,5 +1,20 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+
+## Comming features:
+
+0) have button to allow users to switch models
+
+1) get 'history' from response
+2) show history summary in small window
+3) allow user to condense context -> will this auto clear history to 1 entry?
+4) allow user to select and delete items from history
+
+5) save history to db, implement Express/Mongoose APIs and background workers (Bull/BullMQ)
+
+
+
 ## Getting Started
 
 First, run the development server:
